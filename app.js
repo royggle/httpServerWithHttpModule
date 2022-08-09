@@ -63,4 +63,9 @@ const createUser = (req, res) => {
   // response 객체의 json 메소드를 활용합니다.
 };
 
-module.exports = { createUser, createPost };
+const searchPost = (req, res) => {
+  console.log(posts);
+  res.json({ data: posts });
+};
+
+module.exports = { createUser, createPost, searchPost };
