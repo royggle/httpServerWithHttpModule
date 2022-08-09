@@ -1,6 +1,6 @@
 const http = require("http");
 const express = require("express");
-const { createUser, createPost } = require("./app.js");
+const { createUser, createPost, searchPost } = require("./app.js");
 
 const app = express();
 app.use(express.json());
@@ -9,8 +9,9 @@ app.get("/ping", (req, res) => {
   res.json({ message: "/ pong" });
 });
 
-app.post("/signup", createUser); // 첫번째 인자에는 endpoint url 을 기입하고,
+app.post("/signup", createUser);
 app.post("/postup", createPost);
+app.post("/postsearch", searchPost);
 
 const server = http.createServer(app);
 
