@@ -64,7 +64,7 @@ const createUser = (req, res) => {
 };
 
 const searchPost = (req, res) => {
-  console.log(posts);
+  console.log("==============포스트 조회결과=================");
   res.json({ data: posts });
 };
 
