@@ -11,7 +11,7 @@ app.get("/ping", (req, res) => {
 
 app.post("/signup", createUser);
 app.post("/postup", createPost);
-app.post("/postsearch", searchPost);
+app.get("/postsearch", searchPost);
 
 const server = http.createServer(app);
 
