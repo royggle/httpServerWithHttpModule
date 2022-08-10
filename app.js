@@ -64,8 +64,22 @@ const createUser = (req, res) => {
 };
 
 const searchPost = (req, res) => {
-  console.log("==============포스트 조회결과=================");
   res.json({ data: posts });
 };
 
-module.exports = { createUser, createPost, searchPost };
+const updatePost = (req, res) => {
+  const post = req.body.data;
+  console.log("before: ", posts);
+  for (let i = 0; i < posts.length; i++) {
+    if (posts[i].id === post.id) {
+      posts[i].title = post.title;
+      posts[i].content = post.content;
+      posts[i].userId = post.userId;
+    }
+  }
+  console.log("after: ", posts);
+
+  res.json({ message: "postUpdated" });
+};
+
+module.exports = { createUser, createPost, searchPost, updatePost };
