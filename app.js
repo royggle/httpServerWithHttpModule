@@ -25,6 +25,18 @@ const posts = [
     content: "Request/Response와 Stateless!!",
     userId: 1,
   },
+  {
+    id: 3,
+    title: "CORS 몰랑",
+    content: "서터레스less!!",
+    userId: 2,
+  },
+  {
+    id: 4,
+    title: "BANNNMMMM성",
+    content: "딜리트용!!",
+    userId: 1,
+  },
 ];
 
 const createPost = (req, res) => {
@@ -65,7 +77,6 @@ const createUser = (req, res) => {
 
 const searchPost = (req, res) => {
   let newPost = posts.map((post) => {
-    post.userId;
     const user = users.find((user) => post.userId == user.id);
 
     return {
@@ -73,12 +84,13 @@ const searchPost = (req, res) => {
       userName: user.name,
     };
   });
+
   // "id": 1,
   // "title": "간단한 HTTP API 개발 시작!",
   // "content": "Node.js에 내장되어 있는 http 모듈을 사용해서 HTTP server를 구현.",
   // "userId": 1,
   // "userName": "Rebekah Johnson"
-  newPost = res.json({ data: newPost });
+  res.json({ data: newPost });
 };
 
 const updatePost = (req, res) => {
@@ -118,4 +130,30 @@ const deletePost = (req, res) => {
   res.json({ message: "postingDeleted" });
 };
 
-module.exports = { createUser, createPost, searchPost, updatePost, deletePost };
+const userPlusPost = (req, res) => {
+  const data = req.body;
+
+  const user = users.find((user) => data.userId === user.id);
+  const newPosts = [];
+  posts.forEach((element) => {
+    if (element.userId === user.id) {
+      newPosts.push(element);
+    }
+  });
+  const userInfo = {
+    userId: user.id,
+    userName: user.name,
+    postings: newPosts,
+  };
+
+  res.json({ data: userInfo });
+};
+
+module.exports = {
+  createUser,
+  createPost,
+  searchPost,
+  updatePost,
+  deletePost,
+  userPlusPost,
+};
